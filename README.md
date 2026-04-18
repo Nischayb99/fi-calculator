@@ -1,2 +1,0 @@
-# fi-calculator
-fi-calculator
