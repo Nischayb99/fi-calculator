@@ -17,6 +17,9 @@
       --accent: #a3e635;
       --accent-dim: rgba(163,230,53,0.12);
       --accent-border: rgba(163,230,53,0.35);
+      --accent2: #60a5fa;
+      --accent2-dim: rgba(96,165,250,0.12);
+      --accent2-border: rgba(96,165,250,0.35);
       --text: #f0f2ec;
       --muted: #7a8070;
       --muted2: #4a5040;
@@ -25,135 +28,53 @@
       --radius: 10px;
       --radius-lg: 16px;
     }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-display);
-      min-height: 100vh;
-      padding: 2rem 1rem;
-    }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-display); min-height: 100vh; padding: 2rem 1rem; }
     .page { max-width: 760px; margin: 0 auto; }
-    .header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-    .badge {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      padding: 4px 10px;
-      background: var(--accent-dim);
-      color: var(--accent);
-      border: 1px solid var(--accent-border);
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-    .header h1 {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.5rem;
-    }
+    .header { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px; }
+    .badge { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; padding: 4px 10px; background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-border); border-radius: 4px; text-transform: uppercase; }
+    .badge.reverse { background: var(--accent2-dim); color: var(--accent2); border-color: var(--accent2-border); }
+    .mode-toggle { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .mode-btn { padding: 8px 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; border: none; background: transparent; color: var(--muted); transition: all 0.15s; }
+    .mode-btn.active-forward { background: var(--accent-dim); color: var(--accent); }
+    .mode-btn.active-reverse { background: var(--accent2-dim); color: var(--accent2); }
+    .header h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
     .sub { font-size: 14px; color: var(--muted); font-family: var(--font-mono); }
     .main { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
     @media (max-width: 640px) { .main { grid-template-columns: 1fr; } }
     .field { margin-bottom: 1.5rem; }
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-family: var(--font-mono);
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .input-wrap {
-      display: flex;
-      align-items: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
+    .field label { display: block; font-size: 12px; font-family: var(--font-mono); color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .input-wrap { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s; }
     .input-wrap:focus-within { border-color: var(--accent-border); }
-    .prefix {
-      padding: 0 12px;
-      font-family: var(--font-mono);
-      font-size: 16px;
-      color: var(--accent);
-      border-right: 1px solid var(--border);
-    }
-    .input-wrap input {
-      flex: 1;
-      padding: 12px 14px;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 18px;
-      font-weight: 500;
-    }
+    .input-wrap.reverse-focus:focus-within { border-color: var(--accent2-border); }
+    .prefix { padding: 0 12px; font-family: var(--font-mono); font-size: 16px; color: var(--accent); border-right: 1px solid var(--border); }
+    .prefix.blue { color: var(--accent2); }
+    .input-wrap input { flex: 1; padding: 12px 14px; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--font-mono); font-size: 18px; font-weight: 500; }
     .input-wrap input::placeholder { color: var(--muted2); }
     .swr-group { display: flex; gap: 6px; }
-    .swr-btn {
-      flex: 1;
-      padding: 10px 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--muted);
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.15s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-    }
+    .swr-btn { flex: 1; padding: 10px 6px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--muted); font-family: var(--font-display); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; align-items: center; gap: 3px; }
     .swr-btn:hover { border-color: var(--border-hover); color: var(--text); }
     .swr-btn.active { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); }
+    .swr-btn.active.blue { background: var(--accent2-dim); border-color: var(--accent2-border); color: var(--accent2); }
     .swr-tag { font-size: 9px; font-family: var(--font-mono); letter-spacing: 0.06em; opacity: 0.7; text-transform: uppercase; }
     .slider-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .slider-val { font-family: var(--font-mono); font-size: 14px; color: var(--accent); font-weight: 500; }
-    input[type=range] {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 4px;
-      background: var(--surface2);
-      border-radius: 2px;
-      outline: none;
-      cursor: pointer;
-    }
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--accent);
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
+    .slider-val.blue { color: var(--accent2); }
+    input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; background: var(--surface2); border-radius: 2px; outline: none; cursor: pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; transition: transform 0.1s; }
+    input[type=range].blue::-webkit-slider-thumb { background: var(--accent2); }
     input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-    .slider-ticks {
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      font-family: var(--font-mono);
-      color: var(--muted2);
-      margin-top: 6px;
-      padding: 0 2px;
-    }
+    .slider-ticks { display: flex; justify-content: space-between; font-size: 10px; font-family: var(--font-mono); color: var(--muted2); margin-top: 6px; padding: 0 2px; }
     .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; }
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
     .card--accent { background: var(--accent-dim); border-color: var(--accent-border); }
+    .card--accent2 { background: var(--accent2-dim); border-color: var(--accent2-border); }
     .card-label { font-size: 10px; font-family: var(--font-mono); color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
     .card--accent .card-label { color: rgba(163,230,53,0.6); }
+    .card--accent2 .card-label { color: rgba(96,165,250,0.6); }
     .card-value { font-size: 18px; font-weight: 700; font-family: var(--font-mono); color: var(--text); margin-bottom: 4px; letter-spacing: -0.02em; }
     .card--accent .card-value { color: var(--accent); }
+    .card--accent2 .card-value { color: var(--accent2); }
     .card-note { font-size: 10px; font-family: var(--font-mono); color: var(--muted); }
     .chart-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: 1rem; }
     .chart-legend { display: flex; gap: 16px; margin-bottom: 12px; }
@@ -161,23 +82,7 @@
     .legend-dot { width: 20px; height: 3px; border-radius: 2px; }
     .legend-dot--dashed { background: repeating-linear-gradient(90deg, #60a5fa 0 6px, transparent 6px 10px); }
     .chart-wrap { position: relative; height: 180px; width: 100%; }
-    .copy-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--muted);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      cursor: pointer;
-      justify-content: center;
-      transition: all 0.15s;
-      letter-spacing: 0.05em;
-    }
+    .copy-btn { display: flex; align-items: center; gap: 8px; width: 100%; padding: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--muted); font-family: var(--font-mono); font-size: 12px; cursor: pointer; justify-content: center; transition: all 0.15s; letter-spacing: 0.05em; }
     .copy-btn:hover { border-color: var(--border-hover); color: var(--text); }
     .copy-btn.copied { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
     .footer { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--muted2); text-align: center; letter-spacing: 0.05em; }
@@ -187,24 +92,43 @@
 
 <div class="page">
   <header class="header">
-    <span class="badge">4% Rule</span>
+    <div class="header-top">
+      <span class="badge" id="modeBadge">4% Rule · Forward</span>
+      <div class="mode-toggle">
+        <button class="mode-btn active-forward" id="btnForward">Expense → Corpus</button>
+        <button class="mode-btn" id="btnReverse">Corpus → Expense</button>
+      </div>
+    </div>
     <h1>Financial Independence<br>Calculator</h1>
-    <p class="sub">Find your number. Plan your exit.</p>
+    <p class="sub" id="modeSub">Find your number. Plan your exit.</p>
   </header>
 
   <main class="main">
     <section class="input-section">
-      <div class="field">
-        <label for="monthly">Monthly Expense (₹)</label>
-        <div class="input-wrap">
-          <span class="prefix">₹</span>
-          <input type="number" id="monthly" placeholder="50,000" value="50000" min="0" step="1000" />
+
+      <div id="forwardInput">
+        <div class="field">
+          <label for="monthly">Monthly Expense (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="monthly" placeholder="50,000" value="50000" min="0" step="1000" />
+          </div>
+        </div>
+      </div>
+
+      <div id="reverseInput" style="display:none;">
+        <div class="field">
+          <label for="corpus">You Have Corpus (₹)</label>
+          <div class="input-wrap reverse-focus">
+            <span class="prefix blue">₹</span>
+            <input type="number" id="corpus" placeholder="75,00,000" value="7500000" min="0" step="100000" />
+          </div>
         </div>
       </div>
 
       <div class="field">
         <label>Safe Withdrawal Rate</label>
-        <div class="swr-group">
+        <div class="swr-group" id="swrGroup">
           <button class="swr-btn" data-swr="3">3% <span class="swr-tag">Conservative</span></button>
           <button class="swr-btn active" data-swr="4">4% <span class="swr-tag">Standard</span></button>
           <button class="swr-btn" data-swr="5">5% <span class="swr-tag">Aggressive</span></button>
@@ -231,7 +155,8 @@
     </section>
 
     <section class="results-section">
-      <div class="cards-grid">
+
+      <div class="cards-grid" id="forwardCards">
         <div class="card card--accent">
           <p class="card-label">Required Corpus (Today)</p>
           <p class="card-value" id="c-corpus">—</p>
@@ -254,13 +179,36 @@
         </div>
       </div>
 
+      <div class="cards-grid" id="reverseCards" style="display:none;">
+        <div class="card card--accent2">
+          <p class="card-label">Monthly Withdrawal</p>
+          <p class="card-value" id="r-monthly">—</p>
+          <p class="card-note" id="r-swr-note">at 4% SWR</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Yearly Withdrawal</p>
+          <p class="card-value" id="r-yearly">—</p>
+          <p class="card-note">annual safe withdrawal</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Real Monthly (Inflation-adj.)</p>
+          <p class="card-value" id="r-real-monthly">—</p>
+          <p class="card-note" id="r-real-note">purchasing power today</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Corpus Lasts</p>
+          <p class="card-value" id="r-lasts">Forever</p>
+          <p class="card-note">if SWR is maintained</p>
+        </div>
+      </div>
+
       <div class="chart-block">
         <div class="chart-legend">
           <span class="legend-item"><span class="legend-dot" style="background:#a3e635"></span>Nominal corpus</span>
           <span class="legend-item"><span class="legend-dot legend-dot--dashed"></span>Inflation-adjusted</span>
         </div>
         <div class="chart-wrap">
-          <canvas id="fiChart" role="img" aria-label="Line chart showing corpus growth over selected years"></canvas>
+          <canvas id="fiChart" role="img" aria-label="Line chart showing corpus over selected years"></canvas>
         </div>
       </div>
 
@@ -278,15 +226,13 @@
 
 <script>
 function waitForChart() {
-  if (typeof Chart === 'undefined') {
-    setTimeout(waitForChart, 100);
-    return;
-  }
+  if (typeof Chart === 'undefined') { setTimeout(waitForChart, 100); return; }
   init();
 }
 
 function init() {
   let swr = 4;
+  let mode = 'forward';
   let chart = null;
 
   function fmt(n) {
@@ -298,53 +244,94 @@ function init() {
 
   function setSWR(val) {
     swr = val;
-    document.querySelectorAll(".swr-btn").forEach(b => {
-      b.classList.toggle("active", +b.dataset.swr === val);
+    document.querySelectorAll(".swr-btn").forEach(function(b) {
+      var isActive = +b.dataset.swr === val;
+      b.classList.toggle("active", isActive);
+      if (isActive) { b.classList.toggle("blue", mode === 'reverse'); }
+      else { b.classList.remove("blue"); }
     });
     update();
   }
 
-  document.querySelectorAll(".swr-btn").forEach(btn => {
-    btn.addEventListener("click", () => setSWR(+btn.dataset.swr));
-  });
+  function setMode(m) {
+    mode = m;
+    var isReverse = mode === 'reverse';
 
-  document.getElementById("monthly").addEventListener("input", update);
-  document.getElementById("inflation").addEventListener("input", update);
-  document.getElementById("years").addEventListener("input", update);
+    document.getElementById("forwardInput").style.display = isReverse ? "none" : "block";
+    document.getElementById("reverseInput").style.display = isReverse ? "block" : "none";
+    document.getElementById("forwardCards").style.display = isReverse ? "none" : "grid";
+    document.getElementById("reverseCards").style.display = isReverse ? "grid" : "none";
+
+    document.getElementById("modeBadge").textContent = isReverse ? "4% Rule · Reverse" : "4% Rule · Forward";
+    document.getElementById("modeBadge").className = isReverse ? "badge reverse" : "badge";
+    document.getElementById("modeSub").textContent = isReverse
+      ? "Know your corpus? Find what you can spend."
+      : "Find your number. Plan your exit.";
+
+    document.getElementById("btnForward").className = isReverse ? "mode-btn" : "mode-btn active-forward";
+    document.getElementById("btnReverse").className = isReverse ? "mode-btn active-reverse" : "mode-btn";
+
+    document.getElementById("inflationVal").className = isReverse ? "slider-val blue" : "slider-val";
+    document.getElementById("yearsVal").className = isReverse ? "slider-val blue" : "slider-val";
+    document.getElementById("inflation").className = isReverse ? "blue" : "";
+    document.getElementById("years").className = isReverse ? "blue" : "";
+
+    document.querySelectorAll(".swr-btn").forEach(function(b) {
+      if (b.classList.contains("active")) {
+        b.classList.toggle("blue", isReverse);
+      }
+    });
+
+    update();
+  }
 
   function calcMonthlySIP(target, years, cagr) {
-    const r = cagr / 12;
-    const n = years * 12;
+    var r = cagr / 12;
+    var n = years * 12;
     if (r === 0) return target / n;
     return (target * r) / (Math.pow(1 + r, n) - 1);
   }
 
   function update() {
-    const monthly = parseFloat(document.getElementById("monthly").value) || 0;
-    const inflation = parseFloat(document.getElementById("inflation").value) / 100;
-    const years = parseInt(document.getElementById("years").value);
+    var inflation = parseFloat(document.getElementById("inflation").value) / 100;
+    var years = parseInt(document.getElementById("years").value);
 
     document.getElementById("inflationVal").textContent = Math.round(inflation * 100) + "%";
     document.getElementById("yearsVal").textContent = years + " yrs";
 
-    const yearly = monthly * 12;
-    const corpus = yearly > 0 ? yearly / (swr / 100) : 0;
-    const inflatedCorpus = corpus * Math.pow(1 + inflation, years);
-    const monthlySave = calcMonthlySIP(inflatedCorpus, years, 0.12);
+    var corpus = 0;
+    var nomData = [];
+    var adjData = [];
+    var labels = [];
 
-    document.getElementById("c-yearly").textContent = fmt(yearly);
-    document.getElementById("c-corpus").textContent = fmt(corpus);
-    document.getElementById("c-inflated").textContent = fmt(inflatedCorpus);
-    document.getElementById("c-save").textContent = fmt(monthlySave);
+    if (mode === 'forward') {
+      var monthly = parseFloat(document.getElementById("monthly").value) || 0;
+      var yearly = monthly * 12;
+      corpus = yearly > 0 ? yearly / (swr / 100) : 0;
+      var inflatedCorpus = corpus * Math.pow(1 + inflation, years);
+      var monthlySave = calcMonthlySIP(inflatedCorpus, years, 0.12);
 
-    document.getElementById("c-swr-note").textContent = "at " + swr + "% SWR";
-    document.getElementById("c-infl-note").textContent =
-      "in " + years + " yrs @ " + Math.round(inflation * 100) + "% inflation";
+      document.getElementById("c-yearly").textContent = fmt(yearly);
+      document.getElementById("c-corpus").textContent = fmt(corpus);
+      document.getElementById("c-inflated").textContent = fmt(inflatedCorpus);
+      document.getElementById("c-save").textContent = fmt(monthlySave);
+      document.getElementById("c-swr-note").textContent = "at " + swr + "% SWR";
+      document.getElementById("c-infl-note").textContent = "in " + years + " yrs @ " + Math.round(inflation * 100) + "% inflation";
 
-    const labels = [];
-    const nomData = [];
-    const adjData = [];
-    for (let y = 0; y <= years; y++) {
+    } else {
+      corpus = parseFloat(document.getElementById("corpus").value) || 0;
+      var yearlyW = corpus * (swr / 100);
+      var monthlyW = yearlyW / 12;
+      var realMonthly = monthlyW / Math.pow(1 + inflation, years);
+
+      document.getElementById("r-monthly").textContent = fmt(monthlyW);
+      document.getElementById("r-yearly").textContent = fmt(yearlyW);
+      document.getElementById("r-real-monthly").textContent = fmt(realMonthly);
+      document.getElementById("r-swr-note").textContent = "at " + swr + "% SWR";
+      document.getElementById("r-real-note").textContent = "after " + years + " yrs @ " + Math.round(inflation * 100) + "% inflation";
+    }
+
+    for (var y = 0; y <= years; y++) {
       labels.push(y === 0 ? "Now" : "Yr " + y);
       nomData.push(Math.round(corpus));
       adjData.push(Math.round(corpus * Math.pow(1 + inflation, y)));
@@ -359,29 +346,10 @@ function init() {
       chart = new Chart(document.getElementById("fiChart"), {
         type: "line",
         data: {
-          labels,
+          labels: labels,
           datasets: [
-            {
-              label: "Nominal",
-              data: nomData,
-              borderColor: "#a3e635",
-              backgroundColor: "rgba(163,230,53,0.06)",
-              fill: true,
-              tension: 0.4,
-              pointRadius: 0,
-              borderWidth: 2
-            },
-            {
-              label: "Inflation-adjusted",
-              data: adjData,
-              borderColor: "#60a5fa",
-              backgroundColor: "rgba(96,165,250,0.04)",
-              fill: true,
-              tension: 0.4,
-              pointRadius: 0,
-              borderDash: [6, 4],
-              borderWidth: 2
-            }
+            { label: "Nominal", data: nomData, borderColor: "#a3e635", backgroundColor: "rgba(163,230,53,0.06)", fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 },
+            { label: "Inflation-adjusted", data: adjData, borderColor: "#60a5fa", backgroundColor: "rgba(96,165,250,0.04)", fill: true, tension: 0.4, pointRadius: 0, borderDash: [6, 4], borderWidth: 2 }
           ]
         },
         options: {
@@ -391,42 +359,16 @@ function init() {
           plugins: {
             legend: { display: false },
             tooltip: {
-              backgroundColor: "#1c211a",
-              borderColor: "rgba(255,255,255,0.1)",
-              borderWidth: 1,
-              titleColor: "#7a8070",
-              bodyColor: "#f0f2ec",
+              backgroundColor: "#1c211a", borderColor: "rgba(255,255,255,0.1)", borderWidth: 1,
+              titleColor: "#7a8070", bodyColor: "#f0f2ec",
               titleFont: { family: "JetBrains Mono", size: 11 },
               bodyFont: { family: "JetBrains Mono", size: 12 },
-              callbacks: {
-                label: ctx => " " + ctx.dataset.label + ": " + fmt(ctx.parsed.y)
-              }
+              callbacks: { label: function(ctx) { return " " + ctx.dataset.label + ": " + fmt(ctx.parsed.y); } }
             }
           },
           scales: {
-            x: {
-              ticks: {
-                autoSkip: true,
-                maxTicksLimit: 8,
-                color: "#4a5040",
-                font: { family: "JetBrains Mono", size: 10 }
-              },
-              grid: { display: false },
-              border: { color: "rgba(255,255,255,0.06)" }
-            },
-            y: {
-              ticks: {
-                color: "#4a5040",
-                font: { family: "JetBrains Mono", size: 10 },
-                callback: v => {
-                  if (v >= 1e7) return (v / 1e7).toFixed(1) + "Cr";
-                  if (v >= 1e5) return (v / 1e5).toFixed(0) + "L";
-                  return v;
-                }
-              },
-              grid: { color: "rgba(255,255,255,0.04)" },
-              border: { display: false }
-            }
+            x: { ticks: { autoSkip: true, maxTicksLimit: 8, color: "#4a5040", font: { family: "JetBrains Mono", size: 10 } }, grid: { display: false }, border: { color: "rgba(255,255,255,0.06)" } },
+            y: { ticks: { color: "#4a5040", font: { family: "JetBrains Mono", size: 10 }, callback: function(v) { if (v >= 1e7) return (v/1e7).toFixed(1)+"Cr"; if (v >= 1e5) return (v/1e5).toFixed(0)+"L"; return v; } }, grid: { color: "rgba(255,255,255,0.04)" }, border: { display: false } }
           }
         }
       });
@@ -434,34 +376,61 @@ function init() {
   }
 
   function copyResult() {
-    const m = parseFloat(document.getElementById("monthly").value) || 0;
-    const infl = document.getElementById("inflationVal").textContent;
-    const yrs = document.getElementById("yearsVal").textContent;
-    const text = [
-      "── FI Calculator Results ──",
-      "Monthly Expense : ₹" + Math.round(m).toLocaleString("en-IN"),
-      "SWR             : " + swr + "%",
-      "Inflation       : " + infl,
-      "Horizon         : " + yrs,
-      "",
-      "Yearly Expense  : " + document.getElementById("c-yearly").textContent,
-      "Corpus (today)  : " + document.getElementById("c-corpus").textContent,
-      "Inflation-adj.  : " + document.getElementById("c-inflated").textContent,
-      "Monthly SIP     : " + document.getElementById("c-save").textContent + " (12% CAGR)"
-    ].join("\n");
+    var inflation = document.getElementById("inflationVal").textContent;
+    var yrs = document.getElementById("yearsVal").textContent;
+    var text = "";
 
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById("copyBtn");
+    if (mode === 'forward') {
+      var m = parseFloat(document.getElementById("monthly").value) || 0;
+      text = [
+        "── FI Calculator Results (Forward) ──",
+        "Monthly Expense : ₹" + Math.round(m).toLocaleString("en-IN"),
+        "SWR             : " + swr + "%",
+        "Inflation       : " + inflation,
+        "Horizon         : " + yrs,
+        "",
+        "Yearly Expense  : " + document.getElementById("c-yearly").textContent,
+        "Corpus (today)  : " + document.getElementById("c-corpus").textContent,
+        "Inflation-adj.  : " + document.getElementById("c-inflated").textContent,
+        "Monthly SIP     : " + document.getElementById("c-save").textContent + " (12% CAGR)"
+      ].join("\n");
+    } else {
+      var c = parseFloat(document.getElementById("corpus").value) || 0;
+      text = [
+        "── FI Calculator Results (Reverse) ──",
+        "Corpus          : ₹" + Math.round(c).toLocaleString("en-IN"),
+        "SWR             : " + swr + "%",
+        "Inflation       : " + inflation,
+        "Horizon         : " + yrs,
+        "",
+        "Monthly Withdrawal : " + document.getElementById("r-monthly").textContent,
+        "Yearly Withdrawal  : " + document.getElementById("r-yearly").textContent,
+        "Real Monthly       : " + document.getElementById("r-real-monthly").textContent + " (inflation-adjusted)"
+      ].join("\n");
+    }
+
+    navigator.clipboard.writeText(text).then(function() {
+      var btn = document.getElementById("copyBtn");
       btn.classList.add("copied");
       btn.textContent = "✓  Copied to clipboard";
-      setTimeout(() => {
+      setTimeout(function() {
         btn.classList.remove("copied");
         btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Result Summary';
       }, 2500);
     });
   }
 
+  document.querySelectorAll(".swr-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() { setSWR(+btn.dataset.swr); });
+  });
+  document.getElementById("monthly").addEventListener("input", update);
+  document.getElementById("corpus").addEventListener("input", update);
+  document.getElementById("inflation").addEventListener("input", update);
+  document.getElementById("years").addEventListener("input", update);
+  document.getElementById("btnForward").addEventListener("click", function() { setMode('forward'); });
+  document.getElementById("btnReverse").addEventListener("click", function() { setMode('reverse'); });
   document.getElementById("copyBtn").addEventListener("click", copyResult);
+
   update();
 }
 
